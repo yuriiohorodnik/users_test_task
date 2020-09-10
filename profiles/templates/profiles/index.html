@@ -1,0 +1,40 @@
+{% extends "profiles/base.html" %}
+{% load static %}
+{% block title %}Show users{% endblock %}
+{% block content %}
+    <header>
+        <div class="container">
+            <div class="row justify-content-between bg-dark shadow p-1 rounded border">
+                <div class="col align-items-center">
+                    <div class="row justify-content-between mr-3 text-light ml-3">
+                        <h4 class="mt-2 mr-4">{{ user.username }}</h4>
+                        <button class="btn btn-danger" onclick="location.href='{% url 'logout' %}'">Log out</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row d-flex mt-5">
+                {% for item in users %}
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ item.first_name }} {{ item.last_name }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ item.email }}</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ item.username }}</h6>
+                            <p class="card-text">{{ item.profile.bio }}</p>
+                            {% if request.user.is_superuser %}
+                                <a href="{% url "change" user_id=item.id %}" class="card-link">Change</a>
+                                <a href="{% url "delete" user_id=item.id %}" class="card-link">Delete</a>
+                            {% else %}
+                                {% if item.username == user.get_username %}
+                                    <a href="{% url "change" user_id=item.id %}" class="card-link">Change</a>
+                                    <a href="{% url "delete" user_id=item.id %}" class="card-link">Delete</a>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </header>
+{% endblock %}
+

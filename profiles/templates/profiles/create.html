@@ -1,0 +1,21 @@
+{% extends "profiles/base.html" %}
+{% block title %}Some title{% endblock %}
+{% block content %}
+    <header>
+        <div class="container">
+            <div class="row justify-content-center align-items-center" style="height: 700px;">
+                <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
+                    <form action="{% url 'register' %}" method="POST">
+                        {% csrf_token %}
+                        <h4 class="display-4 mb-5">{% block form_title %}Create user{% endblock %}</h4>
+                        {{ form.as_p }}
+                        {{ form.errors }}
+                        <button class="btn btn-dark mt-3 btn-block" type="submit">
+                            {% block form_button %}Create{% endblock %}
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock %}

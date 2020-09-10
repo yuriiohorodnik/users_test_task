@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>Login page</title>
+</head>
+<body class="text-center">
+<header>
+    <div class="container">
+        <div class="row justify-content-center align-items-center" style="height: 700px;">
+            <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
+                <form action="{% url 'login' %}" method="POST">
+                    {% csrf_token %}
+                    <h4 class="display-4 mb-5">Enter you login info</h4>
+                    {{ form.as_p }}
+                    {{ error }}
+                    <button class="btn btn-dark mt-3 btn-block" type="submit">Sign in</button>
+                </form>
+                <button class="btn btn-dark mt-3 btn-block" onclick="location.href='{% url 'register' %}'">
+                    Register
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+</body>
+</html>
